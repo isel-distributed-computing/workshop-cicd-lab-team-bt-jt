@@ -28,8 +28,8 @@ import todolist.service.UnknownUserException;
 @WebMvcTest(ToDoUserController.class)
 public class ToDoUserControllerTests {
 
-    private final String username = "testuser";
-    private final String password = "testpwd";
+    private final String username = "test";
+    private final String password = "test";
     @Autowired
     private MockMvc mockMvc;
 

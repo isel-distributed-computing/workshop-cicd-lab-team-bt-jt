@@ -32,8 +32,8 @@ import java.util.*;
 @AutoConfigureMockMvc
 public class ToDoListControllerTests {
     private final String description = "abc";
-    private final String username = "jose";
-    private final String password = "pwd123";
+    private final String username = "test";
+    private final String password = "test";
     @MockBean
     private ToDoListService service;
     @Autowired
@@ -67,7 +67,7 @@ public class ToDoListControllerTests {
         ResultActions result =
             mockMvc.perform(post("/todolist")
                             .contentType(MediaType.APPLICATION_JSON)
-                            .header("Authorization", "Bearer: " + token)
+                            .header("Authorization", "Bearer " + token)
                             .content(requestBody))
                     .andExpect(status().isOk());
 
@@ -94,11 +94,11 @@ public class ToDoListControllerTests {
 
         // Act & Assert
         mockMvc.perform(delete("/todolist/"+id)
-                        .header("Authorization", "Bearer: " + token))
+                        .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(id)))
-                .andExpect(jsonPath("$.username", is("jose")))
-                .andExpect(jsonPath("$.description", is("abc")));
+                .andExpect(jsonPath("$.username", is(username)))
+                .andExpect(jsonPath("$.description", is(description)));
     }
 
     @Test
@@ -115,7 +115,7 @@ public class ToDoListControllerTests {
         // Act & Assert
         ResultActions result =
             mockMvc.perform(get("/todolist/"+username)
-                            .header("Authorization", "Bearer: " + token))
+                            .header("Authorization", "Bearer " + token))
                 .andExpect(status().isOk());
 
         MvcResult mvcResult = result.andReturn();
